@@ -12,12 +12,12 @@ const createUserSchema = z
       .string()
       .min(1)
       .max(100)
-      .refine((val) => !/\d/.test(val), "Name must not contain numbers")
+      .refine((val) => !/\d/.test(val), "Last Name must not contain numbers")
       .refine(
         (val) => !/^\s|\s{2,}|\s$/.test(val),
-        "Name cannot have leading/trailing spaces or consecutive spaces"
+        "Last name cannot have leading/trailing spaces or consecutive spaces"
       )
-      .refine((val) => /\s/.test(val), "Name must contain a space"),
+      .refine((val) => /\s/.test(val), "Last Name must contain a space"),
     Contrasenia: z.string().min(1).max(30),
   })
   .strict();
@@ -43,12 +43,12 @@ const updateUserSchema = z
       .string()
       .min(1)
       .max(100)
-      .refine((val) => !/\d/.test(val), "Name must not contain numbers")
+      .refine((val) => !/\d/.test(val), "Last Name must not contain numbers")
       .refine(
         (val) => !/^\s|\s{2,}|\s$/.test(val),
-        "Name cannot have leading/trailing spaces or consecutive spaces"
+        "Last Name cannot have leading/trailing spaces or consecutive spaces"
       )
-      .refine((val) => /\s/.test(val), "Name must contain a space")
+      .refine((val) => /\s/.test(val), "Last Name must contain a space")
       .optional(),
     Contrasenia: z.string().min(1).max(30).optional(),
   })
