@@ -3,7 +3,6 @@ import * as schema from "./user";
 import { db } from "./database/db";
 import { eq, asc, and } from "drizzle-orm";
 import * as bcrypt from "bcryptjs";
-import { logger } from "hono/logger";
 
 const factory = createFactory();
 
@@ -14,7 +13,7 @@ class userController {
       .select()
       .from(schema.users)
       .where(eq(schema.users.Correo, Correo));
-
+    //Si el usuario que se quiere crear ya existe y esta eliminado, se actualiza y se cambia el estado a no eliminado
     if (existingUsers.length === 1 && existingUsers[0].EstaEliminado) {
       const hashedPassword = await bcrypt.hash(Contrasenia, 10);
       await db
