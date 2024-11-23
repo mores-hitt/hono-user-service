@@ -14,11 +14,15 @@ const app = new Hono()
   .post("/", zValidator("json", createUserSchema), ...controller.createUser)
   .get("/", ...controller.getUsers)
   .get(
-    "/:page/:limit",
-    zValidator("param", getPagedUsersSchema),
+    "/paged",
+    zValidator("query", getPagedUsersSchema),
     ...controller.getPagedUsers
   )
   .patch("/", zValidator("json", updateUserSchema), ...controller.updateUser)
   .delete("/", zValidator("json", deleteUserSchema), ...controller.deleteUser);
 
 export default app;
+
+
+//actualizar debe ser campos opcionales
+//el paged debe usar query params

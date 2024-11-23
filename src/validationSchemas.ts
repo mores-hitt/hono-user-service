@@ -24,8 +24,8 @@ const createUserSchema = z
 
 const getPagedUsersSchema = z
   .object({
-    page: z.coerce.number().nonnegative(),
-    limit: z.coerce.number().nonnegative(),
+    page: z.coerce.number().nonnegative().optional(),
+    limit: z.coerce.number().nonnegative().optional(),
   })
   .strict();
 

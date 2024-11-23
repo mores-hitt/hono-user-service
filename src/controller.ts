@@ -3,13 +3,13 @@ import * as schema from "./user";
 import { db } from "./database/db";
 import { eq, asc, and } from "drizzle-orm";
 import * as bcrypt from "bcryptjs";
+import { logger } from "hono/logger";
 
 const factory = createFactory();
 
 class userController {
   public createUser = factory.createHandlers(async (c) => {
-    const { Nombre, Correo, Apellidos, Contrasenia } =
-      await c.req.json();
+    const { Nombre, Correo, Apellidos, Contrasenia } = await c.req.json();
     const existingUsers = await db
       .select()
       .from(schema.users)
@@ -57,7 +57,9 @@ class userController {
     return c.json(users);
   });
   public getPagedUsers = factory.createHandlers(async (c) => {
-    const { page, limit } = c.req.param();
+    const { page, limit } = c.req.query();
+    page ? page : 0;
+    limit ? limit : 25;
 
     const intPage = parseInt(page);
     const intLimit = parseInt(limit);
@@ -77,7 +79,9 @@ class userController {
     const user = await db
       .select()
       .from(schema.users)
-      .where(and(eq(schema.users.id, body.id), eq(schema.users.EstaEliminado, 0)));
+      .where(
+        and(eq(schema.users.id, body.id), eq(schema.users.EstaEliminado, 0))
+      );
     if (user.length === 0) {
       return c.json({ message: "User not found" }, 404);
     }
@@ -86,7 +90,8 @@ class userController {
       .set(body)
       .where(eq(schema.users.id, body.id))
       .returning();
-    if (update.length === 0) { //nunca deberia entrar a este if
+    if (update.length === 0) {
+      //nunca deberia entrar a este if
       return c.json({ message: "User not updated" }, 500);
     }
     return c.json({ message: "User updated" });
