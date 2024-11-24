@@ -1,0 +1,10 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+      - "${PORT}:${PORT}"
+    environment:
+      - SECRET=${SECRET}
+    restart: unless-stopped
