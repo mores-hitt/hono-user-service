@@ -6,7 +6,7 @@ Jhon Michael Lopez Rodriguez
 
 ## Correo
 fernando.sanabria@alumnos.ucn.cl
-john.lopez@alumnos.ucn.cl
+jhon.lopez@alumnos.ucn.cl
 
 ## Rut
 21.011.823-3
@@ -23,13 +23,13 @@ Antes de correr el projecto, asegurate de tener las siguientes cosas instaladas:
 1. Clona el repositorio:
 
 ```bash
-git clone https://github.com/mores-hitt/hono-user-api.git
+git clone https://github.com/mores-hitt/hono-user-service.git
 ```
 
 2. Navega al directorio del proyecto:
 
 ```bash
-cd hono-user-api
+cd hono-user-service
 ```
 
 3. Instala las dependecias del proyecto:
